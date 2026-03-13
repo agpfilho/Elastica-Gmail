@@ -1,0 +1,68 @@
+/* 
+ * Custom Fix para mostrar layout-content e subpastas
+ * Este arquivo sobrescreve o comportamento do JavaScript que oculta o layout-content
+ */
+
+/* Força a exibição do layout-content em todos os modos */
+#layout-content {
+    display: flex !important;
+}
+
+/* Força a exibição do header_back (toolbar com ações) */
+.layout-small #layout-content .header_back,
+.layout-normal #layout-content .header_back {
+    display: flex !important;
+}
+
+/* Força a exibição do header_topmenu (ações do email) */
+#layout-content .header_topmenu {
+    display: inline-block !important;
+}
+
+/* Garante que os botões de ação apareçam */
+#layout-content .header_topmenu a,
+#layout-content .header_topmenu div {
+    display: inline-block !important;
+}
+
+/* Mostra as subpastas na árvore de pastas */
+#layout-sidebar .treelist li ul {
+    display: block !important;
+}
+
+/* Garante que as subpastas não sejam ocultadas */
+#layout-sidebar .treelist li.collapsed ul {
+    display: none !important;
+}
+
+#layout-sidebar .treelist li.expanded ul {
+    display: block !important;
+}
+
+/* Força a exibição da lista de pastas */
+#layout-sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Ajusta o layout para mostrar todos os painéis em modo normal */
+html.layout-normal #layout-content,
+html.layout-normal #layout-list,
+html.layout-normal #layout-sidebar {
+    display: flex !important;
+}
+
+/* Em modo small, mostra o layout-content quando selecionado */
+html.layout-small #layout-content:not(.hidden) {
+    display: flex !important;
+}
+
+/* Garante que o iframe de conteúdo seja exibido */
+#layout-content .iframe-wrapper {
+    display: flex !important;
+    flex: 1 !important;
+}
+
+#layout-content .iframe-wrapper iframe {
+    display: block !important;
+}
