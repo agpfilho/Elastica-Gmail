@@ -1,33 +1,101 @@
 /* 
  * Custom Fix para mostrar layout-content e subpastas
  * Este arquivo sobrescreve o comportamento do JavaScript que oculta o layout-content
+ * 
+ * IMPORTANTE: Este CSS força o layout para modo "normal"
+ * Independente da largura da janela do navegador
  */
+
+/* ============================================
+   FORÇA O LAYOUT PARA MODO NORMAL
+   ============================================ */
+
+/* Remove a classe layout-small e aplica estilos de normal */
+html.layout-small {
+    /* Sobrescreve todos os estilos de small */
+}
+
+/* Força os painéis a aparecerem lado a lado como em modo normal */
+html.layout-small #layout {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+html.layout-small #layout-sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    flex: 0 0 auto !important;
+}
+
+html.layout-small #layout-list {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 360px !important;
+    min-width: 360px !important;
+    max-width: 360px !important;
+    flex: 0 0 auto !important;
+}
+
+html.layout-small #layout-content {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    min-width: 400px !important;
+}
+
+/* ============================================
+   MOSTRA LAYOUT-CONTENT
+   ============================================ */
 
 /* Força a exibição do layout-content em todos os modos */
 #layout-content {
     display: flex !important;
+    flex-direction: column !important;
 }
 
 /* Força a exibição do header_back (toolbar com ações) */
 .layout-small #layout-content .header_back,
-.layout-normal #layout-content .header_back {
+.layout-normal #layout-content .header_back,
+.layout-large #layout-content .header_back {
     display: flex !important;
+    height: 70px !important;
+    align-items: center !important;
+    padding: 0 10px !important;
+    background-color: #1e1e1e !important;
+    border-bottom: 1px solid #333 !important;
 }
 
 /* Força a exibição do header_topmenu (ações do email) */
 #layout-content .header_topmenu {
-    display: inline-block !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    flex: 1 !important;
     font-size: 1.2em !important;
+    gap: 5px !important;
 }
 
 /* Garante que os botões de ação apareçam com tamanho maior */
 #layout-content .header_topmenu a,
 #layout-content .header_topmenu div {
-    display: inline-block !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     width: 50px !important;
     height: 50px !important;
     font-size: 1.3em !important;
     line-height: 50px !important;
+    cursor: pointer !important;
+    border-radius: 4px !important;
+    transition: background-color 0.2s !important;
+}
+
+#layout-content .header_topmenu a:hover,
+#layout-content .header_topmenu div:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Aumenta o tamanho dos ícones dos botões */
@@ -35,7 +103,23 @@
 #layout-content .header_topmenu div:before {
     font-size: 1.5em !important;
     width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
+
+/* Botão voltar */
+.header_back_back {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 50px !important;
+    height: 50px !important;
+}
+
+/* ============================================
+   MOSTRA SUBPASTAS
+   ============================================ */
 
 /* Mostra as subpastas na árvore de pastas */
 #layout-sidebar .treelist li ul {
@@ -57,24 +141,61 @@
     flex-direction: column !important;
 }
 
-/* Ajusta o layout para mostrar todos os painéis em modo normal */
-html.layout-normal #layout-content,
-html.layout-normal #layout-list,
-html.layout-normal #layout-sidebar {
+/* ============================================
+   LAYOUT-LIST (LISTA DE EMAILS)
+   ============================================ */
+
+html.layout-small #layout-list {
     display: flex !important;
 }
 
-/* Em modo small, mostra o layout-content quando selecionado */
-html.layout-small #layout-content:not(.hidden) {
-    display: flex !important;
-}
+/* ============================================
+   IFRAME DE CONTEÚDO
+   ============================================ */
 
 /* Garante que o iframe de conteúdo seja exibido */
 #layout-content .iframe-wrapper {
     display: flex !important;
     flex: 1 !important;
+    overflow: hidden !important;
 }
 
 #layout-content .iframe-wrapper iframe {
     display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+}
+
+/* ============================================
+   OCULTA ELEMENTOS DESNECESSÁRIOS EM SMALL
+   ============================================ */
+
+/* Mostra o botão voltar apenas em modo small */
+html.layout-small .header_back_back {
+    display: inline-flex !important;
+}
+
+html.layout-normal .header_back_back,
+html.layout-large .header_back_back {
+    display: none !important;
+}
+
+/* ============================================
+   AJUSTES RESPONSIVOS
+   ============================================ */
+
+/* Em telas muito pequenas, reduz o tamanho dos botões */
+@media (max-width: 600px) {
+    #layout-content .header_topmenu a,
+    #layout-content .header_topmenu div {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1.1em !important;
+    }
+    
+    #layout-content .header_topmenu a:before,
+    #layout-content .header_topmenu div:before {
+        font-size: 1.2em !important;
+    }
 }
