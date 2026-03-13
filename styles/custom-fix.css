@@ -17,12 +17,24 @@
 /* Força a exibição do header_topmenu (ações do email) */
 #layout-content .header_topmenu {
     display: inline-block !important;
+    font-size: 1.2em !important;
 }
 
-/* Garante que os botões de ação apareçam */
+/* Garante que os botões de ação apareçam com tamanho maior */
 #layout-content .header_topmenu a,
 #layout-content .header_topmenu div {
     display: inline-block !important;
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.3em !important;
+    line-height: 50px !important;
+}
+
+/* Aumenta o tamanho dos ícones dos botões */
+#layout-content .header_topmenu a:before,
+#layout-content .header_topmenu div:before {
+    font-size: 1.5em !important;
+    width: 100% !important;
 }
 
 /* Mostra as subpastas na árvore de pastas */
